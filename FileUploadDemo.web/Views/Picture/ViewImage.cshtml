@@ -1,0 +1,32 @@
+﻿@using FileUpload.data
+@model ViewImageViewModel
+
+@if (Model.HasSeenThisOne)
+{
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <img src="/Images/@Model.Pic.FileName" style="width: 800px;" />
+            <br />
+            <h3>Views: @Model.Pic.Views</h3>
+        </div>
+    </div>
+}
+else
+{
+    <div class="row mt-4">
+        <div class="col-md-6 offset-md-3 bg-light p-4 rounded shadow">
+            @if (!string.IsNullOrEmpty(Model.IncorrectPassword))
+            {
+                <h3 style="color:red">  @Model.IncorrectPassword</h3>
+            }
+            <h4>Please enter the password for this image:</h4>
+            <form method="post" action="/picture/viewimage">
+                <input type="hidden" name="id" value="@Model.Pic.Id" />
+                <input type="text" class="form-control" placeholder="Password" name="password" />
+                <br />
+                <button class="btn btn-primary w-100">Submit</button>
+            </form>
+        </div>
+    </div>
+
+}
